@@ -3,6 +3,8 @@
     <v-content>
       <div id='queries-tab'>
         <tab-header></tab-header>
+
+        <tab-query v-for="q in queries" :query="q" :key="q.id"></tab-query>
       </div>
 
       <v-btn absolute fab bottom right color="primary" @click="openQueryBuilder">
@@ -21,17 +23,24 @@
 <script>
 
 	import TabHeader from './components/Header.vue';
+	import TabQuery from './components/Query.vue';
 
 	export default {
 		name: 'queries-tab',
 		components: {
-			TabHeader
+			TabHeader,
+			TabQuery
 		},
 		data: () => 
 		{
 			return {
 				notification: false,
-				notificationText: 'Open New Query'
+				notificationText: 'Open New Query',
+				queries: [
+					{id: 1, status: 'PENDING', template: 'Other', physician: 'John Doe', sendDate: '20/05/2020', impact: 'MCC'},
+					{id: 2, status: 'AGREED', template: 'Sepsis', physician: 'Victor Malyshev', sendDate: '10/03/2020', impact: 'CC'},
+					{id: 3, status: 'PENDING', template: 'Other', physician: 'Joanna Doe', sendDate: '01/05/2018', impact: ''}
+				]
 			};
 		},
 		methods: {
@@ -46,6 +55,7 @@
 
 <style lang="scss">
 #queries-tab {
+  height: 100%;
   box-sizing: border-box;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -53,6 +63,6 @@
   text-align: left;
   color: #2c3e50;
   background-color: rgb(226, 226, 226);
-  margin: 10px;
+  padding: 6px;
 }
 </style>
