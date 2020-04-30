@@ -13,7 +13,7 @@
         </tab-query>
       </div>
 
-      <v-btn absolute fab bottom right color="primary" @click="openQueryBuilder">
+      <v-btn absolute fab bottom right color="primary" @click="addNewQuery">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-content>
@@ -44,7 +44,7 @@
 			return {
 				notification: false,
 				notificationText: 'Open New Query',
-				responses: ['Pending', 'Agreed', 'Disagreed', 'Not responded'],
+				responses: ['Pending', 'Agreed', 'Disagreed', 'No response'],
 				queries: []
 			};
 		},
@@ -66,6 +66,32 @@
 				}
 				// Logic to open query builder
 				this.notification = true;
+			},
+			async addNewQuery()
+			{
+				const newQuery = {
+					'id': this.queries.length + 1,
+					'status': 'Agreed',
+					'template': 'Other',
+					'physician': 'Victor Malyshev',
+					'sendDate': '10/03/2020',
+					'impact': 'CC'
+				};
+
+				try
+				{
+					const queriesResponse = await axios.post('/queries', newQuery);
+					if (queriesResponse.status === 201)
+					{
+						this.notificationText = 'Added New Query';
+						this.notification = true;
+						this.queries.push(newQuery);
+					}
+				}
+				catch(e)
+				{
+					console.error(e);
+				} 
 			}
 		},
 		async created()
