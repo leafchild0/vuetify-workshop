@@ -4,7 +4,13 @@
       <div id='queries-tab'>
         <tab-header></tab-header>
 
-        <tab-query v-for="q in queries" :query="q" :key="q.id" @open="openQueryBuilder"></tab-query>
+        <tab-query v-for="q in queries" 
+          :query="q"
+          :responses="responses" 
+          :key="q.id" 
+          @open="openQueryBuilder"
+          @response="openQueryBuilderWithStatus">
+        </tab-query>
       </div>
 
       <v-btn absolute fab bottom right color="primary" @click="openQueryBuilder">
@@ -36,10 +42,11 @@
 			return {
 				notification: false,
 				notificationText: 'Open New Query',
+				responses: ['Pending', 'Agreed', 'Disagreed', 'Not responded'],
 				queries: [
-					{id: 1, status: 'PENDING', template: 'Other', physician: 'John Doe', sendDate: '20/05/2020', impact: 'MCC'},
-					{id: 2, status: 'AGREED', template: 'Sepsis', physician: 'Victor Malyshev', sendDate: '10/03/2020', impact: 'CC'},
-					{id: 3, status: 'PENDING', template: 'Other', physician: 'Joanna Doe', sendDate: '01/05/2018', impact: ''}
+					{id: 1, status: 'Pending', template: 'Other', physician: 'John Doe', sendDate: '20/05/2020', impact: 'MCC'},
+					{id: 2, status: 'Agreed', template: 'Sepsis', physician: 'Victor Malyshev', sendDate: '10/03/2020', impact: 'CC'},
+					{id: 3, status: 'Pending', template: 'Other', physician: 'Joanna Doe', sendDate: '01/05/2018', impact: ''}
 				]
 			};
 		},
@@ -49,6 +56,15 @@
 				if (id) 
 				{
 					this.notificationText = 'Open New Query with id ' + id;
+				}
+				// Logic to open query builder
+				this.notification = true;
+			},
+			openQueryBuilderWithStatus(value)
+			{
+				if (value) 
+				{
+					this.notificationText = 'Open New Query with value ' + value.status;
 				}
 				// Logic to open query builder
 				this.notification = true;
@@ -69,4 +85,12 @@
   background-color: rgb(226, 226, 226);
   padding: 6px;
 }
+
+	.v-text-field--solo .v-input__slot, 
+  .v-text-field--outlined .v-input__slot {
+		min-height: auto !important;
+		min-width: auto !important;
+    display: flex !important;
+    align-items: center !important;
+	}
 </style>

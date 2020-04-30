@@ -1,10 +1,26 @@
 <template>
-  <v-card class="query" outlined @click="openQuery">
-        <div class="query__status">{{query.status}}</div>
-        <div class="query__template">{{query.template}}</div>
-        <div class="query__physician">{{query.physician}}</div>
-        <div class="query__date">{{query.sendDate}}</div>
-        <div class="query__impact">{{query.impact}}</div>
+  <v-card class="query" outlined>
+        <div>
+			<v-select
+			ref="status"
+			class="query__status"
+				v-model="selectedResponse"
+				:items="responses"
+				solo
+				outlined
+				height="40">
+				<template v-slot:item="data">
+					<v-icon>mdi-dropbox</v-icon>
+					<div class="status-item">
+						{{data.item}}
+					</div>
+				</template>
+			</v-select>
+		</div>
+        <div @click="openQuery" class="query__template">{{query.template}}</div>
+        <div @click="openQuery" class="query__physician">{{query.physician}}</div>
+        <div @click="openQuery" class="query__date">{{query.sendDate}}</div>
+        <div @click="openQuery" class="query__impact">{{query.impact}}</div>
   </v-card>
 </template>
 
@@ -14,6 +30,18 @@
 		props: {
 			query: Object,
 			responses: Array
+		},
+		computed: {
+			selectedResponse: {
+				get()
+				{
+					return this.query.status || 'Pending';
+				},
+				set(value)
+				{
+					if (value != this.query.response) this.$emit('response', {id: this.query.id, status: value});
+				}
+			}
 		},
 		methods: {
 			openQuery()
@@ -26,13 +54,22 @@
 
 <style scoped lang="scss">
 
+.query__status.v-input {
+	font-size: 14px;
+}
+
+.status-item {
+	font-size: 14px;
+	padding: 0 4px;
+}
+
 .query {
 	width: 100%;
 	height: 60px;
 	cursor: pointer;
 	display: flex;
 	justify-content: space-between;
-	padding: 0 20px;
+	padding: 0 10px;
 	font-size: 14px;
 	height: 50px;
 	align-items: center;
@@ -50,23 +87,38 @@
 
 	&__status {
 			width: 160px;
+			height: 40px;
 		}
 
 		&__template {
 			flex: 1;
 			justify-content: flex-start;
+			padding-left: 10px;
+			height: 100%;
+			display: flex;
+    		align-items: center;
+	
 		}
 
 		&__physician {
 			width: 160px;
+			height: 100%;
+			display: flex;
+    		align-items: center;
 		}
 
 		&__date {
 			width: 100px;
+			height: 100%;
+			display: flex;
+    		align-items: center;
 		}
 
 		&__impact {
 			width: 140px;
+			height: 100%;
+			display: flex;
+    		align-items: center;
 		}
 }
 
