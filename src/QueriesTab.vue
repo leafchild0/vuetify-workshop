@@ -28,6 +28,8 @@
 </template>
 <script>
 
+	import axios from 'axios';
+
 	import TabHeader from './components/Header.vue';
 	import TabQuery from './components/Query.vue';
 
@@ -43,11 +45,7 @@
 				notification: false,
 				notificationText: 'Open New Query',
 				responses: ['Pending', 'Agreed', 'Disagreed', 'Not responded'],
-				queries: [
-					{id: 1, status: 'Pending', template: 'Other', physician: 'John Doe', sendDate: '20/05/2020', impact: 'MCC'},
-					{id: 2, status: 'Agreed', template: 'Sepsis', physician: 'Victor Malyshev', sendDate: '10/03/2020', impact: 'CC'},
-					{id: 3, status: 'Pending', template: 'Other', physician: 'Joanna Doe', sendDate: '01/05/2018', impact: ''}
-				]
+				queries: []
 			};
 		},
 		methods: {
@@ -68,6 +66,21 @@
 				}
 				// Logic to open query builder
 				this.notification = true;
+			}
+		},
+		async created()
+		{
+			try
+			{
+				const queriesResponse = await axios.get('/queries');
+				if (queriesResponse.status === 200)
+				{
+					this.queries = queriesResponse.data;
+				}
+			}
+			catch(e)
+			{
+				console.error(e);
 			}
 		}
 	};
