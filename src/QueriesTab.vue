@@ -4,7 +4,7 @@
       <div id='queries-tab'>
         <tab-header></tab-header>
 
-        <tab-query v-for="q in queries" :query="q" :key="q.id"></tab-query>
+        <tab-query v-for="q in queries" :query="q" :key="q.id" @open="openQueryBuilder"></tab-query>
       </div>
 
       <v-btn absolute fab bottom right color="primary" @click="openQueryBuilder">
@@ -44,8 +44,12 @@
 			};
 		},
 		methods: {
-			openQueryBuilder()
+			openQueryBuilder(id)
 			{
+				if (id) 
+				{
+					this.notificationText = 'Open New Query with id ' + id;
+				}
 				// Logic to open query builder
 				this.notification = true;
 			}

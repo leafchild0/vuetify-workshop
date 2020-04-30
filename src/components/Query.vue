@@ -1,5 +1,5 @@
 <template>
-  <v-card class="query" outlined>
+  <v-card class="query" outlined @click="openQuery">
         <div class="query__status">{{query.status}}</div>
         <div class="query__template">{{query.template}}</div>
         <div class="query__physician">{{query.physician}}</div>
@@ -14,6 +14,12 @@
 		props: {
 			query: Object,
 			responses: Array
+		},
+		methods: {
+			openQuery()
+			{
+				this.$emit('open', this.query.id);
+			}
 		}
 	};
 </script>
