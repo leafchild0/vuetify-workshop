@@ -50,7 +50,6 @@ module.exports = {
 			'switchCase': 1,
 			'ignores': []
 		}],
-		'vue/html-quotes': ['warn','single'],
 		'linebreak-style': [
 			'error',
 			'unix'
