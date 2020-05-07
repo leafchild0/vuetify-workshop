@@ -1,4 +1,12 @@
-# vuetify-workshop
+# Vuetify workshop
+The code for Vuetify workshop. Part 1. 
+### Technologies
+
+- Vue
+- vue-cli (webpack)
+- Vuetify
+- Axios
+- SASS (CSS)
 
 ## Project setup
 ```
@@ -19,6 +27,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
