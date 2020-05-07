@@ -65,13 +65,12 @@
 
 .query {
 	width: 100%;
-	height: 60px;
 	cursor: pointer;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-beQueritween;
 	padding: 0 10px;
 	font-size: 14px;
-	height: 50px;
+	height: 60px;
 	align-items: center;
 	margin-bottom: 8px;
 	border-radius: 2px;
