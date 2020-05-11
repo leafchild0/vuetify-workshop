@@ -2,7 +2,11 @@
   "queries": [
     {
       "id": 1,
-      "status": "Pending",
+      "status": {
+        "id": 14,
+        "name": "Pending",
+        "type": "NOT_SPECIFIED"
+      },
       "template": "CORS",
       "physician": "John Doe",
       "sendDate": "20/05/2020",
@@ -10,7 +14,11 @@
     },
     {
       "id": 2,
-      "status": "Agreed",
+      "status": {
+        "id": 15,
+        "name": "Agree",
+        "type": "AGREE"
+      },
       "template": "Sepsis",
       "physician": "Victor Malyshev",
       "sendDate": "10/03/2020",
@@ -18,11 +26,67 @@
     },
     {
       "id": 3,
-      "status": "Pending",
+      "status": {
+        "id": 16,
+        "name": "Pending",
+        "type": "NOT_SPECIFIED"
+      },
       "template": "Other",
       "physician": "Joanna Doe",
       "sendDate": "01/05/2018",
       "impact": ""
+    }
+  ],
+  "responses": [
+    {
+      "type": "NOT_SPECIFIED",
+      "id": "16",
+      "name": "Pending"
+    },
+    {
+      "type": "AGREE",
+      "id": "18",
+      "name": "test"
+    },
+    {
+      "type": "AGREE",
+      "id": "20",
+      "name": "physitian, agrees!"
+    },
+    {
+      "type": "AGREE",
+      "id": "2",
+      "name": "Physician Agrees"
+    },
+    {
+      "type": "NOT_AGREE",
+      "id": "3",
+      "name": "Physician Disagrees"
+    },
+    {
+      "type": "AGREE",
+      "id": "22",
+      "name": "Pretty long value to check drop-downPretty long value to check drop"
+    },
+    {
+      "type": "UNRESPONSIVE",
+      "id": "4",
+      "name": "None"
+    },
+    {
+      "type": "NOT_AGREE",
+      "id": "14",
+      "name": "Unable to determine"
+    },
+    {
+      "type": "AGREE",
+      "id": "15",
+      "name": "Agree"
+    },
+    {
+      "type": "NOT_AGREE",
+      "id": "12",
+      "name": "No"
     }
   ]
 }
