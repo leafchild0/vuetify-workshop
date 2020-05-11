@@ -23,7 +23,7 @@
 			class="template-list"
 			dense
 		>
-			<v-list-item @click="selectTemplate">
+			<v-list-item @click="selectTemplate({id: 0, name: 'Freefrom template'})">
 				<v-list-item-title class="template-item">Freeform template</v-list-item-title>
 			</v-list-item>
 			<v-list-item>
