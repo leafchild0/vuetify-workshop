@@ -15,16 +15,11 @@
 				</tab-query>
 			</div>
 
-			<v-btn
-				fixed
-				fab
-				bottom
-				right
-				color="primary"
-				@click="addNewQuery"
-			>
-				<v-icon>mdi-plus</v-icon>
-			</v-btn>
+			<template-selector
+				:templates="templates"
+				@selected="openQueryBuilderWithTemplate"
+			></template-selector>
+
 		</v-content>
 
 		<v-snackbar v-model="notification">
@@ -45,12 +40,14 @@
 
 	import TabHeader from './components/Header.vue';
 	import TabQuery from './components/Query.vue';
+	import TemplateSelector from './components/TemplateSelector.vue';
 
 	export default {
 		name: 'queries-tab',
 		components: {
 			TabHeader,
-			TabQuery
+			TabQuery,
+			TemplateSelector
 		},
 		data: () => 
 		{
@@ -58,7 +55,8 @@
 				notification: false,
 				notificationText: 'Open New Query',
 				responses: [],
-				queries: []
+				queries: [],
+				templates: []
 			};
 		},
 		methods: {
@@ -67,6 +65,16 @@
 				if (id) 
 				{
 					this.notificationText = 'Open New Query with id ' + id;
+				}
+				// Logic to open query builder
+				this.notification = true;
+			},
+			openQueryBuilderWithTemplate(template) 
+			{
+				if (template) 
+				{
+					this.notificationText =
+						'Open New Query with template ' + template.name;
 				}
 				// Logic to open query builder
 				this.notification = true;
@@ -85,7 +93,7 @@
 			{
 				const newQuery = {
 					id: this.queries.length + 1,
-					status: 'Agreed',
+					status: 'Agree',
 					template: 'Other',
 					physician: 'Victor Malyshev',
 					sendDate: '10/03/2020',
@@ -116,6 +124,12 @@
 				if (responsesResponse.status === 200) 
 				{
 					this.responses = responsesResponse.data;
+				}
+
+				const templatesResponse = await axios.get('/templates');
+				if (templatesResponse.status === 200) 
+				{
+					this.templates = templatesResponse.data;
 				}
 
 				const queriesResponse = await axios.get('/queries');

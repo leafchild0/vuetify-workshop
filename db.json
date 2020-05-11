@@ -37,6 +37,36 @@
       "impact": ""
     }
   ],
+  "templates": [
+    {
+      "id": "1",
+      "name": "CORS"
+    },
+    {
+      "id": "2",
+      "name": "Anemia"
+    },
+    {
+      "id": "3",
+      "name": "Headert Failure"
+    },
+    {
+      "id": "4",
+      "name": "Shock"
+    },
+    {
+      "id": "5",
+      "name": "Sepsis"
+    },
+    {
+      "id": "6",
+      "name": "Renal railure"
+    },
+    {
+      "id": "7",
+      "name": "HIV"
+    }
+  ],
   "responses": [
     {
       "type": "NOT_SPECIFIED",
